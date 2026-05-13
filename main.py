@@ -1,149 +1,69 @@
-# 🍳 AI Recipe Generator
+# ============================================
+# INSTALAÇÃO DAS BIBLIOTECAS
+# ============================================
+!pip install -q langchain langchain-community langchain-groq
 
-Gerador de receitas utilizando Inteligência Artificial com LangChain e Groq.
-
-O projeto funciona no terminal e cria receitas completas de forma simples, divertida e prática.
-
----
-
-## 🚀 Tecnologias
-
-- Python
-- LangChain
-- Groq API
-- Llama 3
-- Prompt Engineering
-
----
-
-## ⚙️ Funcionalidades
-
-✔ Geração automática de receitas  
-✔ Respostas organizadas e amigáveis  
-✔ Receitas completas com ingredientes e preparo  
-✔ Interface simples no terminal  
-✔ Uso de IA com LangChain + Groq  
-
----
-
-## 🤖 Como a IA funciona
-
-O projeto utiliza a API da Groq junto com o modelo Llama 3 para gerar receitas personalizadas com base no pedido do usuário.
-
-A IA responde como um chef de cozinha experiente, ensinando receitas de maneira leve e prática.
-
----
-
-## 🔑 Configuração da API
-
-Crie um arquivo chamado `.env` e coloque sua chave da API:
-
-```env
-GROQ_API_KEY=sua_chave_aqui
-```
-
----
-
-## ▶️ Como executar
-
-Instale as dependências:
-
-```bash
-pip install -U langchain langchain-community langchain-groq python-dotenv
-```
-
-Execute o projeto:
-
-```bash
-python main.py
-```
-
----
-
-## 💻 Código Principal
-
-```python
+# ============================================
+# IMPORTAÇÕES
+# ============================================
 import os
-from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
 
-load_dotenv()
+# ============================================
+# CONFIGURAÇÕES (COLOQUE SUA CHAVE AQUI)
+# ============================================
+os.environ["GROQ_API_KEY"] = "SUA_CHAVE_AQUI"  # Substitua pela sua chave
 
+# ============================================
+# MODELO DE IA (GROQ)
+# ============================================
 llm = ChatGroq(
     model="llama-3.3-70b-versatile",
-    temperature=0.7
+    temperature=0.7  # maior criatividade
 )
 
+# ============================================
+# PROMPT (GERADOR DE RECEITAS)
+# ============================================
 prompt = ChatPromptTemplate.from_template("""
-Você é um chef de cozinha experiente.
+PAPEL:
+Você é um chef especialista em receitas culinárias.
 
-Crie receitas completas com:
-- Nome da receita
-- Tempo de preparo
-- Rendimento
-- Ingredientes
-- Modo de preparo
+OBJETIVO:
+Criar receitas completas com base no pedido do usuário.
 
-Pedido do usuário:
+REGRAS:
+- Gere uma receita completa (ingredientes + modo de preparo)
+- Seja claro, simples e prático
+- Organize em etapas
+- Inclua tempo de preparo e rendimento
+- Não invente ingredientes impossíveis
+- Sempre responda em português
+
+PEDIDO DO USUÁRIO:
 {pergunta}
 """)
 
-chain = prompt | llm
+# ============================================
+# LOOP DE INTERAÇÃO
+# ============================================
+print("Gerador de Receitas 🍳 (digite 'x' para sair)\n")
 
-print("Gerador de Receitas 🍳")
-print("Digite 'x' para sair.\n")
+chain = prompt | llm
 
 while True:
     pergunta = input("Você: ")
-
+    
     if pergunta.lower() == "x":
         print("Encerrando...")
         break
-
+    
     resposta = chain.invoke({
         "pergunta": pergunta
     })
+    
+    print("\nReceita:\n", resposta.content, "\n")
 
-    print("\nReceita:\n")
-    print(resposta.content)
-    print("\n")
-```
 
----
 
-## 📷 Exemplo de Uso
-
-```txt
-Você: bolo de chocolate
-
-Receita:
-
-🍫 Bolo de Chocolate Fofinho
-
-Tempo de preparo: 50 minutos
-
-Ingredientes:
-- 2 xícaras de farinha
-- 1 xícara de açúcar
-- ...
-```
-
----
-
-## 📚 Aprendizados
-
-Durante este projeto foram praticados:
-
-- Integração com APIs de IA
-- Prompt Engineering
-- Uso de LangChain
-- Estruturação de aplicações com IA
-- Manipulação de entrada do usuário
-- Organização de projetos Python
-
----
-
-## 📄 Licença
-
-MIT License
