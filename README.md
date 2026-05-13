@@ -40,7 +40,46 @@ Crie um arquivo chamado `.env` e coloque sua chave da API:
 ```env
 GROQ_API_KEY=sua_chave_aqui
 ```
+## 🔑 Como conseguir sua chave da API
 
+1. Acesse o site da Groq:
+
+https://console.groq.com
+
+2. Crie uma conta ou faça login.
+
+3. Vá até a área de API Keys.
+
+4. Clique em:
+
+```txt
+Create API Key
+```
+
+5. Copie a chave gerada.
+
+---
+
+## 📁 Configurando no projeto
+
+Crie um arquivo chamado `.env` na pasta do projeto.
+
+Dentro dele coloque:
+
+```env
+GROQ_API_KEY=sua_chave_aqui
+```
+
+Exemplo:
+
+```env
+GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxx
+```
+
+---
+
+⚠️ Nunca publique sua chave no GitHub.
+```
 ---
 
 ## ▶️ Como executar
