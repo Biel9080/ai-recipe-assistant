@@ -1,5 +1,4 @@
-# 🍳 AI Recipe Generator
-
+# 🍳 IA Geradora de Receitas
 Gerador de receitas utilizando Inteligência Artificial com LangChain e Groq.
 
 O projeto funciona no terminal e cria receitas completas de forma simples, divertida e prática.
